@@ -10,9 +10,6 @@ public class GestorInstrumentos {
         return false;
     }
 
-    public List getInventario(){
-        return inventario;
-    }
 
     public boolean eliminarPorClave(int clave){
         return inventario.removeIf(instrumento -> instrumento.getClave() == clave);
@@ -33,6 +30,9 @@ public class GestorInstrumentos {
         return inventario.stream()
                 .filter(instrumento -> instrumento.getTipo().equalsIgnoreCase(forma))
                 .toList();
+    }
+    public List getInventario(){
+        return inventario;
     }
 
 
