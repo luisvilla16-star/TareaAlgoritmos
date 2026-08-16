@@ -27,6 +27,12 @@ public class GestorInstrumentos {
                 .toList();
     }
 
+    public List buscarPorCondicion(String condicion){
+        return inventario.stream()
+                .filter(instrumento -> instrumento.getCondicion().equalsIgnoreCase(condicion))
+                .toList();
+    }
+
 
     public List getInventario(){
         return inventario;
