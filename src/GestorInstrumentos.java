@@ -26,17 +26,7 @@ public class GestorInstrumentos {
                 .filter(instrumento -> instrumento.getTipo().equalsIgnoreCase(tipo))
                 .toList();
     }
-    public List buscarPorForma(String forma){
-        return inventario.stream()
-                .filter(instrumento -> instrumento.getTipo().equalsIgnoreCase(forma))
-                .toList();
-    }
 
-    public List buscarPorCondicion(String condicion){
-        return inventario.stream()
-                .filter(instrumento -> instrumento.getCondicion().equalsIgnoreCase(condicion))
-                .toList();
-    }
 
     public List getInventario(){
         return inventario;
