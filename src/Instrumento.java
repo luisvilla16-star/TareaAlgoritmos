@@ -91,5 +91,10 @@ public class Instrumento {
                 +validez +" confiabilidad: " +confiabiblidad +" cita: " +cita;
     }
 
+    public String guardar(){
+        return nombre + "," + clave + "," + tipo + "," + condicion + ","
+               + autor + "," + validez + "," + confiabiblidad + "," + cita;
+    }
+
 }
 
