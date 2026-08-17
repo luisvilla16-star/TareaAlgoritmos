@@ -106,7 +106,7 @@ public class Instrumento {
 
     public String guardar(){
         return nombre + "," + clave + "," + tipo + "," + condicion + ","
-               + autor + "," + validez + "," + confiabiblidad + "," + cita;
+               + autor + "," + validez + "," + confiabiblidad + "," + cita + "," + forma;
     }
 
 }
