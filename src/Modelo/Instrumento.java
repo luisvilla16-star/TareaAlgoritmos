@@ -1,3 +1,5 @@
+package Modelo;
+
 public class Instrumento {
     private String nombre;
     private  int clave;
@@ -87,9 +89,9 @@ public class Instrumento {
     @Override
 
     public String toString(){
-        return "nombre: " + nombre +" clave: " +clave +" tipo: " +tipo
-                +" condicion: " +condicion +" autor: " +autor +" validez: "
-                +validez +" confiabilidad: " +confiabiblidad +" cita: " +cita;
+        return "\nNombre: " + nombre +"\nClave: " +clave +"\nTipo: " +tipo
+                +"\nCondicion: " +condicion +"\nAutor: " +autor +"\nValidez: "
+                +validez +"\nConfiabilidad: " +confiabiblidad +"\nCita: " +cita;
     }
 
     public String guardar(){
