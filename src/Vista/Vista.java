@@ -54,6 +54,16 @@ public class Vista {
         return datos;
     }
 
+    public HashMap<String,Boolean>buscarPorEvaluacion(){
+        HashMap<String,Boolean>datos = new HashMap<>();
+        System.out.println("Ingrese el tipo de evaluacion");
+        String tipo = scanner.nextLine();
+        System.out.println("Ingrese el estado de la evaluacion (true/false)");
+        Boolean estado = scanner.nextBoolean();
+        datos.put(tipo, estado);
+        return datos;
+    }
+
     public String pedirCadena(String mensaje) {
         System.out.print(mensaje);
         return scanner.nextLine();
