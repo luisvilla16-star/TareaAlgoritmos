@@ -12,6 +12,12 @@ public class Controlador {
     private ArchivoRegistro archivo;
     private GestorInstrumentos gestor;
 
+    public Controlador(Vista vista, ArchivoRegistro archivo, GestorInstrumentos gestor) {
+        this.vista = vista;
+        this.archivo = archivo;
+        this.gestor = gestor;
+    }
+
     public void iniciar(){
         int opcion=vista.mostrarMenu();
         ejecutarOpcion(opcion);
