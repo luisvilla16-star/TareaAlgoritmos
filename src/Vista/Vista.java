@@ -26,9 +26,8 @@ public class Vista {
         System.out.println("7. Buscar por Evaluacion");
         System.out.println("8. Buscar por Condicion y Evaluacion");
         System.out.println("9. Ordenados por Clave");
-        System.out.println("10. Ordenados por Autor");
-        System.out.println("11. Guardar en archivo");
-        System.out.println("12. Cargar en archivo");
+        System.out.println("10. Guardar en archivo");
+        System.out.println("11. Cargar en archivo");
         System.out.println("0. Salir");
         System.out.println("Seleccione una opcion");
 
@@ -66,7 +65,13 @@ public class Vista {
 
     public String pedirCadena(String mensaje) {
         System.out.print(mensaje);
-        return scanner.nextLine();
+        String entrada = scanner.nextLine();
+
+        if (entrada.trim().isEmpty()) {
+            entrada = scanner.nextLine();
+        }
+
+        return entrada;
     }
 
     public void mostrarInstrumentos(List<Instrumento>lista){
