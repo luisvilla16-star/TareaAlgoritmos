@@ -45,7 +45,8 @@ public class ArchivoRegistro {
                         datosArchivo[4],
                         Boolean.parseBoolean(datosArchivo[5]),
                         Boolean.parseBoolean(datosArchivo[6]),
-                        datosArchivo[7]);
+                        datosArchivo[7],
+                        datosArchivo[8]);
                 inventario.add(instrumento);//se añaden a la Lista
             }
 
