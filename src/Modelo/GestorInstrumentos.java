@@ -1,10 +1,15 @@
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class GestorInstrumentos {
     private List<Instrumento> inventario;
+
+    public GestorInstrumentos() {
+        this.inventario = new ArrayList<>();
+    }
 
     public boolean agregarInstrumento(Instrumento ins){
         if (!this.inventario.contains(ins)){
