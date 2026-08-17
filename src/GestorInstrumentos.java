@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 
 public class GestorInstrumentos {
@@ -26,11 +27,6 @@ public class GestorInstrumentos {
                 .filter(instrumento -> instrumento.getTipo().equalsIgnoreCase(tipo))
                 .toList();
     }
-    public List buscarPorForma(String forma){
-        return inventario.stream()
-                .filter(instrumento -> instrumento.getTipo().equalsIgnoreCase(forma))
-                .toList();
-    }
 
     public List buscarPorCondicion(String condicion){
         return inventario.stream()
@@ -38,6 +34,40 @@ public class GestorInstrumentos {
                 .toList();
     }
 
+    public List buscarPorEvaluacionConfiabilidad(boolean confiabilidad){
+        return inventario.stream()
+                .filter(instrumento -> instrumento.getConfiabilidad() == confiabilidad)
+                .toList();
+    }
+    public List buscarPorEvaluacionValidez(boolean validez){
+        return inventario.stream()
+                .filter(instrumento -> instrumento.getValidez() == validez)
+                .toList();
+    }
+
+    public List buscarPorCondicionYEvaluacionConfiabilidad(String condicion,boolean confiabilidad){
+        return inventario.stream()
+                .filter(instrumento -> instrumento.getCondicion().equalsIgnoreCase(condicion)
+                        && instrumento.getConfiabilidad() == confiabilidad)
+                .toList();
+    }
+
+    public List buscarPorCondicionYEvaluacionValidez(String condicion,boolean validez){
+        return inventario.stream()
+                .filter(instrumento -> instrumento.getCondicion().equalsIgnoreCase(condicion)
+                        && instrumento.getValidez() == validez)
+                .toList();
+    }
+
+    public List ordenarPorClave(){
+        return inventario.stream()
+                .sorted(Comparator.comparing(Instrumento::getClave))
+                .toList();
+    }
+
+    public void setInventario(List<Instrumento> inventario){
+        this.inventario = inventario;
+    }
     public List getInventario(){
         return inventario;
     }
