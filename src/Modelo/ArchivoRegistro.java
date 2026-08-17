@@ -29,7 +29,7 @@ public class ArchivoRegistro {
         //bloque try-catch para abrir el archivo y leerlo
         try(BufferedReader bf=new BufferedReader(new FileReader(rutaArchivo))){
             String linea;
-
+            inventario.clear();
             //ciclo con condicion que establece que se repetira mientras el BufferedReader no llegue al final
             //del archivo y sea igual a null
             while((linea=bf.readLine())!=null){
