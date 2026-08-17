@@ -4,7 +4,7 @@ public class Instrumento {
     private String tipo;
     private String condicion;
     private String autor;
-    private  boolean validez;
+    private boolean validez;
     private boolean confiabiblidad;
     private String cita;
 
@@ -82,6 +82,7 @@ public class Instrumento {
     public void setCita(String cita){
         this.cita=cita;
     }
+
 
     @Override
 
