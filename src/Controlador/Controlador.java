@@ -5,6 +5,8 @@ import Modelo.GestorInstrumentos;
 import Modelo.Instrumento;
 import Vista.Vista;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Controlador {
@@ -19,66 +21,32 @@ public class Controlador {
     }
 
     public void iniciar(){
-        int opcion=vista.mostrarMenu();
-        ejecutarOpcion(opcion);
+        int opcion;
+
+        do {
+            opcion = vista.mostrarMenu();
+            ejecutarOpcion(opcion);
+        }while(opcion!=0);
     }
 
     public void ejecutarOpcion(int opcion){
-        do {
             switch (opcion) {
                 case 1:
-                    System.out.println("Ingresa el nombre del instrumento:");
-                    Scanner scanNombre = new Scanner(System.in);
-                    String newnombre = scanNombre.next();
+                    HashMap<String, Object> datos = vista.pedirDatosInstrumento();
 
-                    System.out.println("Ingresa el tipo de instrumento (identificar/manejar):");
-                    Scanner scanTipo = new Scanner(System.in);
-                    String newtipo = scanTipo.next();
-
-                    System.out.println("Ingresa la forma del instrumento (Ej. test):");
-                    Scanner scanForma = new Scanner(System.in);
-                    String newforma = scanForma.next();
-
-                    System.out.println("Ingresa la condicion que mide el instrumento:");
-                    Scanner scanCondicion = new Scanner(System.in);
-                    String newcondicion = scanCondicion.next();
-
-                    System.out.println("Ingresa el autor del instrumento:");
-                    Scanner scanAutor = new Scanner(System.in);
-                    String newautor = scanAutor.next();
-
-                    boolean newvalido;
-                    System.out.println("¿El instrumento es valido?\n1)Si\n2)No");
-                    Scanner scanValidez = new Scanner(System.in);
-                    int newvalidez = scanValidez.nextInt();
-                    if (newvalidez == 1) {
-                        newvalido = true;
-                    } else {
-                        newvalido = false;
-                    }
-
-                    boolean newconfiable;
-                    System.out.println("¿El instrumento es confiable?\n1)Si\n2)No");
-                    Scanner scanConfiabilidad = new Scanner(System.in);
-                    int newconfiabilidad = scanConfiabilidad.nextInt();
-                    if (newconfiabilidad == 1) {
-                        newconfiable = true;
-                    } else {
-                        newconfiable = false;
-                    }
-
-                    System.out.println("Ingresa la cita del instrumento:");
-                    Scanner scanCita = new Scanner(System.in);
-                    String newcita = scanCita.next();
-
-                    System.out.println("Ingresa la clave del instrumento:");
-                    Scanner scanClave = new Scanner(System.in);
-                    int newclave = scanClave.nextInt();
+                    String newnombre = (String) datos.get("nombre");
+                    int newclave = Integer.parseInt((String) datos.get("clave"));
+                    String newtipo = (String) datos.get("tipo");
+                    String newcondicion = (String) datos.get("condicion");
+                    String newautor = (String) datos.get("autor");
+                    boolean newvalido = (boolean) datos.get("validez");
+                    boolean newconfiable = (boolean) datos.get("confiabilidad");
+                    String newcita = (String) datos.get("cita");
+                    String newforma = (String) datos.get("forma");
 
                     Instrumento newInstrument = new Instrumento(newnombre, newclave, newtipo, newcondicion, newautor,
-                            newvalido, newconfiable, newcita);
+                            newvalido, newconfiable, newcita, newforma);
                     gestor.agregarInstrumento(newInstrument);
-                    iniciar();
                     break;
 
                 case 2:
@@ -86,35 +54,36 @@ public class Controlador {
                     Scanner scanclave = new Scanner(System.in);
                     int Clave = scanclave.nextInt();
                     gestor.eliminarPorClave(Clave);
-                    iniciar();
+                    guardarEnArchivo();
+
                     break;
 
                 case 3:
                     String autor = vista.pedirCadena("Ingrese el/la autor@: ");
                     vista.mostrarInstrumentos(gestor.buscarPorAutor(autor));
-                    iniciar();
+
                     break;
 
                 case 4:
                     String tipo = vista.pedirCadena("Ingrese el tipo del instrumento: ");
                     vista.mostrarInstrumentos(gestor.buscarPorTipo(tipo));
-                    iniciar();
+
                     break;
 
                 case 5:
                     String forma = vista.pedirCadena("Ingrese la forma del instrumento: ");
                     vista.mostrarInstrumentos(gestor.buscarPorForma(forma));
-                    iniciar();
+
                     break;
 
                 case 6:
                     String condicion = vista.pedirCadena("Ingrese la condicion: ");
                     vista.mostrarInstrumentos(gestor.buscarPorCondicion(condicion));
-                    iniciar();
+
                     break;
 
                 case 7:
-                    boolean Validity;
+                   /** boolean Validity;
                     boolean Confiability;
                     boolean evaluado;
 
@@ -140,76 +109,95 @@ public class Controlador {
                         evaluado = true;
                     } else {
                         evaluado = false;
-                    }
+                    }*/
 
-                    vista.mostrarInstrumentos(gestor.buscarPorEvaluacion(evaluado));
-                    iniciar();
+                   HashMap<String,Boolean> evaluacion = vista.buscarPorEvaluacion();
+                   if (evaluacion.containsKey("validez")) {
+                       vista.mostrarInstrumentos(gestor.buscarPorEvaluacionValidez(evaluacion.get("validez")));
+                   }
+
+                   else if (evaluacion.containsKey("confiabilidad")) {
+                       vista.mostrarInstrumentos(gestor.buscarPorEvaluacionConfiabilidad(evaluacion.get("confiabilidad")));
+                   }
+                   else{
+                       vista.mostrarMensaje("Esa evaluación no existe");
+                   }
+
+
                     break;
 
                 case 8:
-                    boolean Valido;
-                    boolean Confiable;
-                    boolean evaluated;
-
-                    String condition = vista.pedirCadena("Ingrese la condicion: ");
-
-                    System.out.println("¿El instrumento es valido?\n1)Si\n2)No");
-                    Scanner scanvalido = new Scanner(System.in);
-                    int valido = scanvalido.nextInt();
-                    if (valido == 1) {
-                        Valido = true;
-                    } else {
-                        Valido = false;
+//                    boolean Valido;
+//                    boolean Confiable;
+//                    boolean evaluated;
+//
+//                    String condition = vista.pedirCadena("Ingrese la condicion: ");
+//
+//                    System.out.println("¿El instrumento es valido?\n1)Si\n2)No");
+//                    Scanner scanvalido = new Scanner(System.in);
+//                    int valido = scanvalido.nextInt();
+//                    if (valido == 1) {
+//                        Valido = true;
+//                    } else {
+//                        Valido = false;
+//                    }
+//
+//                    System.out.println("¿El instrumento es confiable?\n1)Si\n2)No");
+//                    Scanner scanconfiable = new Scanner(System.in);
+//                    int confiable = scanconfiable.nextInt();
+//                    if (confiable == 1) {
+//                        Confiable = true;
+//                    } else {
+//                        Confiable = false;
+//                    }
+//
+//                    if (Valido && Confiable) {
+//                        evaluated = true;
+//                    } else {
+//                        evaluated = false;
+//                    }
+                    HashMap<String,Boolean> condicionYEvaluacion = vista.buscarPorEvaluacion();
+                    String cadena = vista.pedirCadena("Ingresa la condición: ");
+                    if (condicionYEvaluacion.containsKey("validez")) {
+                        vista.mostrarInstrumentos(gestor.buscarPorCondicionYEvaluacionValidez(cadena,condicionYEvaluacion.get("validez")));
                     }
 
-                    System.out.println("¿El instrumento es confiable?\n1)Si\n2)No");
-                    Scanner scanconfiable = new Scanner(System.in);
-                    int confiable = scanconfiable.nextInt();
-                    if (confiable == 1) {
-                        Confiable = true;
-                    } else {
-                        Confiable = false;
+                    else if (condicionYEvaluacion.containsKey("confiabilidad")) {
+                        vista.mostrarInstrumentos(gestor.buscarPorCondicionYEvaluacionConfiabilidad(cadena,condicionYEvaluacion.get("confiabilidad")));
+                    }
+                    else{
+                        vista.mostrarMensaje("Esa evaluación o condición no existen");
                     }
 
-                    if (Valido && Confiable) {
-                        evaluated = true;
-                    } else {
-                        evaluated = false;
-                    }
 
-                    vista.mostrarInstrumentos(gestor.buscarPorCondicionYEvaluacion(condition, evaluated));
-                    iniciar();
                     break;
 
                 case 9:
-                    vista.mostrarInstrumentos(gestor.obtenerTodosOrdenadosPorClave());
-                    iniciar();
+                    vista.mostrarInstrumentos(gestor.ordenarPorClave());
+
                     break;
 
                 case 10:
-                    vista.mostrarInstrumentos(gestor.obtenerTodosOrdenadosPorAutor());
-                    iniciar();
+                    guardarEnArchivo();
+
                     break;
 
                 case 11:
-                    guardarEnArchivo();
-                    iniciar();
-                    break;
-
-                case 12:
                     cargarDesdeArchivo();
-                    iniciar();
+                    vista.mostrarInstrumentos(gestor.getInventario());
+
                     break;
 
                 case 0:
+                    System.out.println("Saliendo del sistema\n");
                     break;
 
                 default:
                     System.out.println("Opcion invalida.\n");
-                    iniciar();
+
                     break;
             }
-        }while(opcion!=0);
+
     }
 
     public void cargarDesdeArchivo(){
