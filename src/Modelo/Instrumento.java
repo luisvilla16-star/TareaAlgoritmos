@@ -4,6 +4,7 @@ public class Instrumento {
     private String nombre;
     private  int clave;
     private String tipo;
+    private String forma;
     private String condicion;
     private String autor;
     private boolean validez;
@@ -11,7 +12,7 @@ public class Instrumento {
     private String cita;
 
     public Instrumento(String nombre, int clave, String tipo, String condicion,
-                       String autor, boolean validez, boolean confiabiblidad, String cita){
+                       String autor, boolean validez, boolean confiabiblidad, String cita, String forma){
         this.nombre=nombre;
         this.clave=clave;
         this.tipo=tipo;
@@ -20,6 +21,7 @@ public class Instrumento {
         this.validez=validez;
         this.confiabiblidad=confiabiblidad;
         this.cita=cita;
+        this.forma=forma;
     }
 
     public String getNombre() {
@@ -83,6 +85,14 @@ public class Instrumento {
 
     public void setCita(String cita){
         this.cita=cita;
+    }
+
+    public void setForma(String forma){
+        this.forma=forma;
+    }
+
+    public String getForma(){
+        return forma;
     }
 
 

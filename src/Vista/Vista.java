@@ -17,7 +17,7 @@ public class Vista {
 
     public int mostrarMenu(){
         System.out.println("--Menu Principal--");
-        System.out.println("1. Agregar Modelo.Instrumento");
+        System.out.println("1. Agregar Instrumento");
         System.out.println("2. Eliminar por Clave");
         System.out.println("3. Buscar por Autor");
         System.out.println("4. Buscar por Tipo");
@@ -40,10 +40,11 @@ public class Vista {
     public HashMap<String,Object>pedirDatosInstrumento(){
         HashMap<String,Object>datos = new HashMap<>();
 
-        System.out.println("Ingrese nuevo Modelo.Instrumento");
+        System.out.println("Ingrese nuevo Instrumento");
         datos.put("nombre", pedirCadena("Nombre: "));
         datos.put("clave", pedirCadena("Clave: "));
         datos.put("tipo", pedirCadena("Tipo : "));
+        datos.put("forma", pedirCadena("Forma : "));
         datos.put("condicion", pedirCadena("Condición: "));
         datos.put("autor", pedirCadena("Autor: "));
         datos.put("validez", pedirCadena("¿Tiene validez? (si/no): ").equalsIgnoreCase("si"));
