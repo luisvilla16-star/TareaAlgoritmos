@@ -5,7 +5,7 @@ import java.io.*;
 public class ArchivoRegistro {
 
     //El atributo de la clase define la ruta del archivo
-    public String rutaArchivo="ArchivoInstrumentos.txt";
+    public String rutaArchivo="ArchivoInstrumentos.CSV";
 
     //funcion que recibe una Lista con los intrumentos regisrados
     public void guardarDatos(List<Instrumento> inventario){

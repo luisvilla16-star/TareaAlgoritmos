@@ -6,23 +6,23 @@ import java.util.List;
 
 public class GestorInstrumentos {
     private List<Instrumento> inventario;
+    private Instrumento[] instrumentos;
+    private int contador;
 
     public GestorInstrumentos() {
         this.inventario = new ArrayList<>();
+        contador = 0;
+        instrumentos = new Instrumento[20];
     }
-
     public boolean agregarInstrumento(Instrumento ins){
         if (!this.inventario.contains(ins)){
             return this.inventario.add(ins);
         }
         return false;
     }
-
-
     public boolean eliminarPorClave(int clave){
         return inventario.removeIf(instrumento -> instrumento.getClave() == clave);
     }
-
     public List buscarPorAutor(String autor){
         return inventario.stream()
                 .filter(instrumento -> instrumento.getAutor().equalsIgnoreCase(autor))

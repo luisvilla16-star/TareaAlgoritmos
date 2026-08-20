@@ -19,12 +19,12 @@ public class Vista {
         System.out.println("--Menu Principal--");
         System.out.println("1. Agregar Instrumento");
         System.out.println("2. Eliminar por Clave");
-        System.out.println("3. Buscar por Autor");
-        System.out.println("4. Buscar por Tipo");
-        System.out.println("5. Buscar por Forma");
-        System.out.println("6. Buscar por Condicion");
-        System.out.println("7. Buscar por Evaluacion");
-        System.out.println("8. Buscar por Condicion y Evaluacion");
+        System.out.println("3. Mostar por Autor");
+        System.out.println("4. Mostrar por Tipo");
+        System.out.println("5. Mostrar por Forma");
+        System.out.println("6. Mostrar por Condicion");
+        System.out.println("7. Mostrar por Evaluacion");
+        System.out.println("8. Mostrar por Condicion y Evaluacion");
         System.out.println("9. Ordenados por Clave");
         System.out.println("10. Guardar en archivo");
         System.out.println("11. Cargar en archivo");
